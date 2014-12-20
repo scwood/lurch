@@ -21,11 +21,9 @@ watch() {
 }
 ```
 
-Which boils the process of watching a twitch stream into,
+Which boils the process of watching a twitch stream into:
 
 ```
 streams
 watch nl_kripp
 ```
-
-Not too shabby.
