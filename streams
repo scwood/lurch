@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+
+import requests
+import string
+
+api = requests.get('https://api.twitch.tv/kraken/streams')
+list = api.json()
+print('-'*85)
+print('{0:<5}'.format(' #'), end = '')
+print('{0:<27}'.format('channel'), end = '')
+print('{0:<12}'.format('viewers'), end = '')
+print('game')
+print('-'*85)
+for x in range(0, 25):
+    num = ' ' + str(x + 1) + '.'
+    name = list['streams'][x]['channel']['name']
+    viewers = list['streams'][x]['viewers']
+    game = list['streams'][x]['game']
+    print('{0:<5}'.format(num), end = '')
+    print('{0:<27}'.format(name), end = '')
+    print('{0:<12,}'.format(viewers), end = '')
+    print(game) 
