@@ -17,7 +17,7 @@ If you want to take it further, add this function to your config file of the she
 
 ```
 watch() {
-    livestreamer twitch.tv/$1
+    livestreamer twitch.tv/$1 best
 }
 ```
 
