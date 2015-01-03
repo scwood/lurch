@@ -6,10 +6,14 @@ Streams is a python script that will list the top 25 streams currently live on t
 
 Requires python 3+ and [requests](http://docs.python-requests.org/en/latest/).
 
+On OSX:
+
 ```
 brew install python3
 pip3 install requests
 ```
+
+For other operating systems replace `brew` with the package manager of your choice.
 
 To use, download the script and add it to a directory in your PATH. Make executable by running `chmod +x streams`, and run at your leisure with `streams`.
 
