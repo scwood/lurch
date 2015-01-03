@@ -15,7 +15,7 @@ pip3 install requests
 
 For other operating systems replace `brew` with the package manager of your choice.
 
-To use, download the script and add it to a directory in your PATH. Make executable by running `chmod +x streams`, and run at your leisure with `streams`.
+To use, download the script and add it to a directory in your PATH. Make executable by running `chmod +x streams`, and run at your leisure with the command `streams`.
 
 If you want to take it further, add this function to your config file of the shell of your choice:
 
