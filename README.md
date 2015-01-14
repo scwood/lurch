@@ -25,7 +25,7 @@ watch() {
 }
 ```
 
-Which boils the process of watching a twitch stream into:
+Which boils the process of watching a twitch stream down to:
 
 ```
 streams
