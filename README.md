@@ -1,5 +1,5 @@
 
-![](https://cloud.githubusercontent.com/assets/9126138/6034774/21f91388-abe4-11e4-829e-430cea6f7b9b.png)
+![](https://cloud.githubusercontent.com/assets/9126138/6034774/21f91388-abe4-11e4-829e-430cea6f7b9b.png =200x)
 
 # Streams
 
