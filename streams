@@ -8,26 +8,36 @@ def can_connect_to_twitch():
         check = requests.get('http://www.twitch.tv/')
         return True
     except requests.ConnectionError:
-        print("error: can't reach twitch.tv")
+        print('error: can\'t reach twitch.tv')
     return False
+
+def trim(string, length):
+    if len(string) <= length:
+        return string
+    else: 
+        return string[0:length - 3] + '...'
 
 def print_streams():
     api = requests.get('https://api.twitch.tv/kraken/streams')
     list = api.json()  
-    print("-"*85)
-    print("{0:<5}".format(' #'), end = '')
-    print("{0:<27}".format('channel'), end = '')
-    print("{0:<12}".format('viewers'), end = '')
-    print("game")
-    print("-"*85)
-    for x in range(0, 25):
+    line_size = 79
+    number_size = 5
+    name_size = 22
+    viewers_size = 11
+    game_size = 41
+    header = '{0:<%d}{1:<%d}{2:<%d}' % (number_size, name_size, viewers_size)
+    content = '{0:<%d}{1:<%d}{2:<%d,}' % (number_size, name_size, viewers_size)
+    print('-' * line_size)
+    print(header.format(' #','channel','viewers'), end = '')
+    print('game')
+    print('-' * line_size)
+    number_of_streams = 25
+    for x in range(0, number_of_streams):
         num = ' ' + str(x + 1) + '.'
-        name = list['streams'][x]['channel']['name']
+        name = trim(list['streams'][x]['channel']['name'], name_size - 1)
         viewers = list['streams'][x]['viewers']
-        game = list['streams'][x]['game']
-        print("{0:<5}".format(num), end = '')
-        print("{0:<27}".format(name), end = '')
-        print("{0:<12,}".format(viewers), end = '')
+        game = trim(list['streams'][x]['game'], game_size - 1)
+        print(content.format(num, name, viewers), end = '')
         print(game) 
 
 if can_connect_to_twitch(): 
