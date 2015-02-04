@@ -27,7 +27,7 @@ def print_streams():
         game = list['streams'][x]['game']
         print("{0:<5}".format(num), end = '')
         print("{0:<27}".format(name), end = '')
-        print("{0:<12}".format(viewers), end = '')
+        print("{0:<12,}".format(viewers), end = '')
         print(game) 
 
 if can_connect_to_twitch(): 
