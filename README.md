@@ -1,5 +1,7 @@
 # Streams
 
+![](https://cloud.githubusercontent.com/assets/9126138/6034774/21f91388-abe4-11e4-829e-430cea6f7b9b.png)
+
 Streams is a python script that will list the top 25 streams currently live on twitch.tv, sorted by popularity. When combined with [livestreamer](https://github.com/chrippa/livestreamer) it can provide a seamless twitch experience all from the terminal. 
 
 ## Usage
@@ -17,7 +19,7 @@ For other operating systems replace `brew` with the package manager of your choi
 
 To use, download the script and add it to a directory in your PATH. Make executable by running `chmod +x streams`, and run at your leisure with the command `streams`.
 
-If you want to take it further, add this function or one similar to the config file of the shell of your choice:
+If you want to take it further, add this function or something similar to your .bashrc.
 
 ```
 watch() {
