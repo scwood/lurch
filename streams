@@ -12,7 +12,7 @@ def can_connect_to_twitch():
     return False
 
 def trim(string, length):
-    if len(string) <= length:
+    if string == None or len(string) <= length:
         return string
     else: 
         return string[0:length - 3] + '...'
