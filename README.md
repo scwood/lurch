@@ -2,8 +2,6 @@
 
 <img src='https://cloud.githubusercontent.com/assets/9126138/6536575/e2fc822e-c40b-11e4-896e-a0c911030bfb.png' width="500px">
 
-![](https://cloud.githubusercontent.com/assets/9126138/6536575/e2fc822e-c40b-11e4-896e-a0c911030bfb.png)
-
 Streams is a python script that will list the top 25 streams currently live on twitch.tv, sorted by popularity. When combined with [livestreamer](https://github.com/chrippa/livestreamer) it can provide a seamless twitch experience all from the terminal. 
 
 ## Usage
