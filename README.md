@@ -33,3 +33,7 @@ Which boils the process of watching a twitch stream down to:
 streams
 watch nl_kripp
 ```
+
+## License
+
+MIT
