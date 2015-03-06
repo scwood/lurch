@@ -28,8 +28,7 @@ def print_streams():
     header = '{0:<%d}{1:<%d}{2:<%d}' % (number_size, name_size, viewers_size)
     content = '{0:<%d}{1:<%d}{2:<%d,}' % (number_size, name_size, viewers_size)
     print('-' * line_size)
-    print(header.format(' #','channel','viewers'), end = '')
-    print('game')
+    print(header.format(' #','channel','viewers') + 'game')
     print('-' * line_size)
     number_of_streams = 25
     for x in range(0, number_of_streams):
@@ -37,8 +36,7 @@ def print_streams():
         name = trim(list['streams'][x]['channel']['name'], name_size - 1)
         viewers = list['streams'][x]['viewers']
         game = trim(list['streams'][x]['game'], game_size - 1)
-        print(content.format(num, name, viewers), end = '')
-        print(game) 
+        print(content.format(num, name, viewers) + game)
 
 if can_connect_to_twitch(): 
     print_streams()
