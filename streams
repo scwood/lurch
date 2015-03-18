@@ -12,14 +12,17 @@ def can_connect_to_twitch():
     return False
 
 def trim(string, length):
-    if string == None or len(string) <= length:
+    if string is None:
+        return "None"
+    elif len(string) <= length:
         return string
     else: 
         return string[0:length - 3] + '...'
 
 def print_streams():
-    api = requests.get('https://api.twitch.tv/kraken/streams')
-    list = api.json()  
+    api_call = requests.get('https://api.twitch.tv/kraken/streams')
+    twitch_data = api_call.json()  
+    streams = twitch_data['streams']
     line_size = 79
     number_size = 5
     name_size = 22
@@ -30,13 +33,12 @@ def print_streams():
     print('-' * line_size)
     print(header.format(' #','channel','viewers') + 'game')
     print('-' * line_size)
-    number_of_streams = 25
-    for x in range(0, number_of_streams):
-        num = ' ' + str(x + 1) + '.'
-        name = trim(list['streams'][x]['channel']['name'], name_size - 1)
-        viewers = list['streams'][x]['viewers']
-        game = trim(list['streams'][x]['game'], game_size - 1)
-        print(content.format(num, name, viewers) + game)
+    for x in range(0, len(streams)):
+        number = ' ' + str(x + 1) + '.'
+        name = trim(streams[x]['channel']['name'], name_size - 1)
+        viewers = streams[x]['viewers']
+        game = trim(streams[x]['game'], game_size - 1)
+        print(content.format(number, name, viewers) + game)
 
 if can_connect_to_twitch(): 
     print_streams()
