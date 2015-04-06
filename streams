@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import argparse
 import requests
 import string
 
@@ -19,8 +20,9 @@ def trim(string, length):
     else: 
         return string[0:length - 3] + '...'
 
-def print_streams():
-    api_call = requests.get('https://api.twitch.tv/kraken/streams')
+def print_streams(number):
+    url = 'https://api.twitch.tv/kraken/streams?limit=' + str(number)
+    api_call = requests.get(url)
     twitch_data = api_call.json()  
     streams = twitch_data['streams']
     line_size = 79
@@ -40,5 +42,13 @@ def print_streams():
         game = trim(streams[x]['game'], game_size - 1)
         print(content.format(number, name, viewers) + game)
 
+parser = argparse.ArgumentParser(
+        description = "lists the top streams on twitch.tv")
+parser.add_argument("-n", "--number", type=int, choices=[10, 25, 50, 100], 
+        help="number of streams to display, default is 25")
+args = parser.parse_args()
+number_to_display = 25
+if args.number != None:
+    number_to_display = args.number
 if can_connect_to_twitch(): 
-    print_streams()
+    print_streams(number_to_display)
