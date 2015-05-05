@@ -1,6 +1,6 @@
 # Streams
 
-<img src='https://cloud.githubusercontent.com/assets/9126138/6536575/e2fc822e-c40b-11e4-896e-a0c911030bfb.png' width="500px">
+<img src='https://cloud.githubusercontent.com/assets/9126138/7484541/1f053c10-f347-11e4-93d2-818ae492d647.png' width="500px">
 
 Streams is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single stream. Streams also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that launching a stream from the terminal is quick and easy.
 
