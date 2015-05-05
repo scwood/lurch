@@ -2,36 +2,36 @@
 
 <img src='https://cloud.githubusercontent.com/assets/9126138/6536575/e2fc822e-c40b-11e4-896e-a0c911030bfb.png' width="500px">
 
-A python script that will list the top 25 streams currently live on twitch.tv, sorted by popularity. When combined with [livestreamer](https://github.com/chrippa/livestreamer) it can provide a seamless twitch experience all from the terminal. 
+Streams is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single stream. Streams also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that launching a stream from the terminal is quick and easy.
 
-## Usage
+## Example Usage
 
-Requires python 3 and [requests](http://docs.python-requests.org/en/latest/).
+`$ streams list` will list the top streams currently live on twitch.tv
 
-On OSX:
+By default Streams will list the 25 most popular streams. This number can be increased or decreased with an option number argument `-n` or `--number`
 
-```
-brew install python3
-pip3 install requests
-```
+`$ streams list -n 50`
 
-For other operating systems replace `brew` with the package manager of your choice.
-
-To use, download the script and add it to a directory in your PATH. Make executable by running `chmod +x streams`, and run at your leisure with the command `streams`.
-
-If you want to take it further, add this function or something similar to your .bashrc.
+Streams can also check the status of a current channel. 
 
 ```
-watch() {
-    livestreamer twitch.tv/$1 best
-}
+$ streams check nl_kripp
+nl_kripp is playing Hearthstone: Heroes of Warcraft with 13,539 viewers.
 ```
 
-Which boils the process of watching a twitch stream down to:
+Streams also provides a shortcut to easily launch a stream with livestreamer
 
 ```
-streams
-watch nl_kripp
+$ streams watch nl_kripp
+```
+
+## Installation 
+
+```
+cd ~
+git clone https://github.com/scwood/streams
+cd streams 
+python setup.py install
 ```
 
 ## License
