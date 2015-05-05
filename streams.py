@@ -1,7 +1,7 @@
 import click
 import requests
 
-# TODO add command to get live streams from a persons follows list
+from subprocess import call
 
 def can_connect_to_twitch():
     try:
@@ -22,7 +22,11 @@ def trim(string, length):
 @click.group()
 @click.help_option('-h', '--help')
 def cli():
-    '''This script does twitch stuff.'''
+    '''Streams is a CLI for twitch.tv. Streams can do a number of things
+    including browsing the top channels or checking the status of a particular 
+    channel. It also provides an easy shortcut into livestreamer to make
+    launching twitch streams from the command line easy.
+    '''
     pass
 
 @cli.command(short_help='Lists the top live channels.')
@@ -70,19 +74,19 @@ def check(channel):
     api_call = requests.get(url)
     twitch_data = api_call.json()
     if 'error' in twitch_data:
-        click.echo('error:', channel, 'is not a valid stream name')
+        click.echo('error: ' + channel + ' is not a valid channel name')
     elif twitch_data['stream'] == None:
-        click.echo(channel, 'is offline')
+        click.echo(channel + ' is offline')
     else:
         game = twitch_data['stream']['game']
         viewers = '{:,}'.format(twitch_data['stream']['viewers'])
         click.echo('%s is playing %s with %s viewers' % (channel,game,viewers))
 
-# @cli.command()
-# @click.argument('channel')
-# @click.option('--quality', '-q', default='best')
-# @click.help_option('-h', '--help')
-# def watch(channel, quality):
-#     if not can_connect_to_twitch():
-#         return
-#     call(['livestreamer', 'http://twitch.tv/' + str(channel), quality])
+@cli.command(short_help='Launch livestreamer for a particular channel.')
+@click.argument('channel')
+@click.option('--quality', '-q', default='best')
+@click.help_option('-h', '--help')
+def watch(channel, quality):
+    if not can_connect_to_twitch():
+        return
+    call(['livestreamer', 'http://twitch.tv/' + str(channel), quality])
