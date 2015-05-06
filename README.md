@@ -19,7 +19,7 @@ $ streams check nl_kripp
 nl_kripp is playing Hearthstone: Heroes of Warcraft with 13,539 viewers.
 ```
 
-Streams also provides a shortcut to easily launch a stream with livestreamer
+Streams also provides a shortcut to easily launch a stream with livestreamer.
 
 ```
 $ streams watch nl_kripp
