@@ -1,13 +1,17 @@
+import os
 from setuptools import setup
 
-long_description = read('README.txt')
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
     name='twinge',
-    version='2.1',
-    description='CLI for Twitch.tv',
-    long_description=long_description,
+    version='1.0',
     author='Spencer Wood',
+    author_email='spencercwood@gmail.com',
+    description='CLI for Twitch.tv',
+    long_description=read('README.md'),
+    license='MIT',
     py_modules=['twinge'],
     install_requires=[
         'click',
