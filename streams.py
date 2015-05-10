@@ -27,7 +27,6 @@ def cli():
     channel. It also provides an easy shortcut into livestreamer to make
     launching twitch streams from the command line easy.
     '''
-    pass
 
 @cli.command(short_help='Lists the top live channels.')
 @click.help_option('-h', '--help')
