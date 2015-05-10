@@ -1,36 +1,36 @@
-# Streams
+# Twinge
 
 <img src='https://cloud.githubusercontent.com/assets/9126138/7484541/1f053c10-f347-11e4-93d2-818ae492d647.png' width="500px">
 
-Streams is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single stream. Streams also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that launching a stream from the terminal is quick and easy.
+Twinge is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single stream. Twinge also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that launching a stream from the terminal is quick and easy.
 
 ## Example Usage
 
-`$ streams list` will list the top streams currently live on twitch.tv
+`$ twinge list` will list the top streams currently live on twitch.tv
 
-By default Streams will list the 25 most popular streams. This number can be increased or decreased with an option number argument `-n` or `--number`
+By default Twinge will list the 25 most popular streams. This number can be increased or decreased with an option number argument `-n` or `--number`
 
-`$ streams list -n 50`
+`$ twinge list -n 50`
 
-Streams can also check the status of a current channel. 
+Twinge can also check the status of a current channel. 
 
 ```
-$ streams check nl_kripp
+$ twinge check nl_kripp
 nl_kripp is playing Hearthstone: Heroes of Warcraft with 13,539 viewers.
 ```
 
-Streams also provides a shortcut to easily launch a stream with livestreamer.
+Twinge also provides a shortcut to easily launch a stream with livestreamer.
 
 ```
-$ streams watch nl_kripp
+$ twinge watch nl_kripp
 ```
 
 ## Installation 
 
 ```
 cd ~
-git clone https://github.com/scwood/streams
-cd streams 
+git clone https://github.com/scwood/twinge
+cd twinge 
 python setup.py install
 ```
 
