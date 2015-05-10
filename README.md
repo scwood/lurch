@@ -1,6 +1,6 @@
 # Twinge
 
-<img src='https://cloud.githubusercontent.com/assets/9126138/7556647/c073fe48-f738-11e4-8a86-0314239c04a1.png' width="550px">
+<img src='https://cloud.githubusercontent.com/assets/9126138/7556668/c221f6ae-f739-11e4-9c92-2879124a1105.png' width='550px'>
 
 Twinge is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single stream. Twinge also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that launching a stream from the terminal is quick and easy.
 
