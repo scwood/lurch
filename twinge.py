@@ -22,7 +22,7 @@ def trim(string, length):
 @click.group()
 @click.help_option('-h', '--help')
 def cli():
-    '''Streams is a CLI for twitch.tv. Streams can do a number of things
+    '''Twinge is a CLI for twitch.tv. Twinge can do a number of things
     including browsing the top channels or checking the status of a particular 
     channel. It also provides an easy shortcut into livestreamer to make
     launching twitch streams from the command line easy.
