@@ -11,7 +11,6 @@ setup(
     author_email='spencercwood@gmail.com',
     description='CLI for Twitch.tv',
     long_description=read('README.md'),
-    license='MIT',
     py_modules=['twinge'],
     install_requires=[
         'click',
