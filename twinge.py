@@ -3,29 +3,14 @@ import requests
 
 from subprocess import call
 
-def can_connect_to_twitch():
-    try:
-        check = requests.get('http://www.twitch.tv/')
-        return True
-    except requests.ConnectionError:
-        click.echo('error: can\'t reach twitch.tv')
-    return False
-
-def trim(string, length):
-    if string is None:
-        return 'None'
-    elif len(string) <= length:
-        return string
-    else: 
-        return string[0:length - 3] + '...'
-
 @click.group()
 @click.help_option('-h', '--help')
 def cli():
-    '''Twinge is a CLI for twitch.tv. Twinge can do a number of things
-    including browsing the top channels or checking the status of a particular 
-    channel. It also provides an easy shortcut into livestreamer to make
-    launching twitch streams from the command line easy.
+    '''Twinge is a CLI for Twitch.tv. Twinge can do a number of things
+    including browsing the top channels, checking user followed channels,
+    or checking the status of a particular channel. It also provides an easy
+    shortcut into livestreamer to make launching twitch streams from the command
+    line easy.
     '''
 
 @cli.command(short_help='Lists the top live channels.')
@@ -37,6 +22,9 @@ def list(number):
     '''This will list the top channels that are currently live on twitch
     sorted by number of viewers.
     '''
+    print_list(number)
+
+def print_list(number):
     if not can_connect_to_twitch():
         return
     url = 'https://api.twitch.tv/kraken/streams?limit=' + str(number)
@@ -60,6 +48,22 @@ def list(number):
         game = trim(streams[x]['game'], game_size - 1)
         click.echo(content.format(number, name, viewers) + game)
 
+def can_connect_to_twitch():
+    try:
+        check = requests.get('http://www.twitch.tv/')
+        return True
+    except requests.ConnectionError:
+        click.echo('Error: can\'t reach twitch.tv')
+    return False
+
+def trim(string, length):
+    if string is None:
+        return 'None'
+    elif len(string) <= length:
+        return string
+    else: 
+        return string[0:length - 3] + '...'
+
 @cli.command(short_help='Checks the status of a single channel.')
 @click.argument('channel')
 @click.help_option('-h', '--help')
@@ -67,13 +71,16 @@ def check(channel):
     '''This will check if a particular channel is currently online or not,
     and if it is will provide additional information.
     '''
+    print_check(channel)
+
+def print_check(channel):
     if not can_connect_to_twitch():
         return
     url = 'https://api.twitch.tv/kraken/streams/' + channel
     api_call = requests.get(url)
     twitch_data = api_call.json()
-    if 'error' in twitch_data:
-        click.echo('error: ' + channel + ' is not a valid channel name')
+    if 'Error' in twitch_data:
+        click.echo('Error: ' + channel + ' is not a valid channel name')
     elif twitch_data['stream'] == None:
         click.echo(channel + ' is offline')
     else:
@@ -86,6 +93,44 @@ def check(channel):
 @click.option('--quality', '-q', default='best')
 @click.help_option('-h', '--help')
 def watch(channel, quality):
+    '''Launces livestreamer for a particular channel.'''
+    launch_stream(channel, quality)
+
+def launch_stream(channel, quality):
     if not can_connect_to_twitch():
         return
     call(['livestreamer', 'http://twitch.tv/' + str(channel), quality])
+
+@cli.command(short_help='Check user followed channels.')
+@click.argument('username')
+def following(username):
+    '''Lists a users followed streams'''
+    print_following(username)
+
+def print_following(username):
+    if not can_connect_to_twitch():
+        return
+    url = 'https://api.twitch.tv/kraken/users/' + username + '/follows/channels'
+    api_call = requests.get(url)
+    if api_call.status_code == 404:
+        click.echo('Error: not a valid user')
+        return
+    twitch_data = api_call.json()
+    channels = []
+    for stream in twitch_data['follows']:
+        channel = stream['channel']['display_name']
+        if is_online(channel):
+            channels.append(channel)
+    channels = sorted(channels)
+    for c in channels:
+        print_check(c)
+
+def is_online(channel):
+    if not can_connect_to_twitch:
+        return
+    url = 'https://api.twitch.tv/kraken/streams/' + channel
+    api_call = requests.get(url)
+    channel_data = api_call.json()
+    if channel_data['stream'] == None:
+        return False
+    return True
