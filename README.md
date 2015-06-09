@@ -12,25 +12,33 @@ By default Twinge will list the 25 most popular streams. This number can be incr
 
 `$ twinge list -n 50`
 
-Twinge can also check the status of a current channel. 
-
-```
-$ twinge check nl_kripp
-nl_kripp is playing Hearthstone: Heroes of Warcraft with 13,539 viewers.
-```
-
 Twinge also provides a shortcut to easily launch a stream with livestreamer.
 
 ```
 $ twinge watch nl_kripp
 ```
 
-## Installation 
+Or
+
+```
+$ twinge watch n
+```
+
+Where `n` corrosponds to a stream number in `twinge list`. `twinge watch 1` would launch livestreamer for the first stream in the list, `twinge watch 2` would launch it for the second, etc.
+
+Twinge can also check the status of a current channel.
+
+```
+$ twinge check nl_kripp
+nl_kripp is playing Hearthstone: Heroes of Warcraft with 13,539 viewers.
+```
+
+## Installation
 
 ```
 cd ~
 git clone https://github.com/scwood/twinge
-cd twinge 
+cd twinge
 python setup.py install
 ```
 
