@@ -14,8 +14,10 @@ setup(
     py_modules=['twinge'],
     install_requires=[
         'click',
-        'requests',
+        'json',
         'livestreamer',
+        'os.path',
+        'requests',
     ],
     entry_points={
         'console_scripts': [
