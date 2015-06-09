@@ -1,10 +1,12 @@
 import click
+import json
+import os.path
 import requests
 
 from subprocess import call
 
 @click.group()
-@click.help_option('-h', '--help')
+@click.help_option('--help')
 def cli():
     '''Twinge is a CLI for Twitch.tv. Twinge can do a number of things
     including browsing the top channels, checking user followed channels,
@@ -14,13 +16,13 @@ def cli():
     '''
 
 @cli.command(short_help='Lists the top live channels.')
-@click.help_option('-h', '--help')
+@click.help_option('--help')
 @click.option('--number', '-n', default=25, required=False,
-        type=click.IntRange(1, 100), 
+        type=click.IntRange(1, 100),
         help='Changes the number of channels to list.')
 def list(number):
     '''This will list the top channels that are currently live on twitch
-    sorted by number of viewers.
+    sorted by number of viewers. It will also caches the streams locally so
     '''
     print_list(number)
 
@@ -29,8 +31,9 @@ def print_list(number):
         return
     url = 'https://api.twitch.tv/kraken/streams?limit=' + str(number)
     api_call = requests.get(url)
-    twitch_data = api_call.json()  
+    twitch_data = api_call.json()
     streams = twitch_data['streams']
+    streams_cache = {}
     line_size = 79
     number_size = 5
     name_size = 22
@@ -39,14 +42,16 @@ def print_list(number):
     header = '{0:<%d}{1:<%d}{2:<%d}' % (number_size, name_size, viewers_size)
     content = '{0:<%d}{1:<%d}{2:<%d,}' % (number_size, name_size, viewers_size)
     click.echo('-' * line_size)
-    click.echo(header.format(' #','channel','viewers') + 'game')
+    click.echo(header.format(' #', 'channel', 'viewers') + 'game')
     click.echo('-' * line_size)
     for x in range(0, len(streams)):
         number = ' ' + str(x + 1) + '.'
-        name = trim(streams[x]['channel']['name'], name_size - 1)
+        name = trim(streams[x]['channel']['display_name'], name_size - 1)
+        streams_cache[x + 1] = name
         viewers = streams[x]['viewers']
         game = trim(streams[x]['game'], game_size - 1)
         click.echo(content.format(number, name, viewers) + game)
+    cache_streams(streams_cache)
 
 def can_connect_to_twitch():
     try:
@@ -61,12 +66,16 @@ def trim(string, length):
         return 'None'
     elif len(string) <= length:
         return string
-    else: 
+    else:
         return string[0:length - 3] + '...'
+
+def cache_streams(streams):
+    with open('streams_cache.json', 'w') as outfile:
+        json.dump(streams, outfile, indent = 2)
 
 @cli.command(short_help='Checks the status of a single channel.')
 @click.argument('channel')
-@click.help_option('-h', '--help')
+@click.help_option('--help')
 def check(channel):
     '''This will check if a particular channel is currently online or not,
     and if it is will provide additional information.
@@ -84,14 +93,15 @@ def print_check(channel):
     elif twitch_data['stream'] == None:
         click.echo(channel + ' is offline')
     else:
+        name = twitch_data['stream']['channel']['display_name'];
         game = twitch_data['stream']['game']
         viewers = '{:,}'.format(twitch_data['stream']['viewers'])
-        click.echo('%s is playing %s with %s viewers' % (channel,game,viewers))
+        click.echo('%s is playing %s with %s viewers' % (name,game,viewers))
 
 @cli.command(short_help='Launch livestreamer for a particular channel.')
 @click.argument('channel')
 @click.option('--quality', '-q', default='best')
-@click.help_option('-h', '--help')
+@click.help_option('--help')
 def watch(channel, quality):
     '''Launces livestreamer for a particular channel.'''
     launch_stream(channel, quality)
@@ -99,10 +109,17 @@ def watch(channel, quality):
 def launch_stream(channel, quality):
     if not can_connect_to_twitch():
         return
-    call(['livestreamer', 'http://twitch.tv/' + str(channel), quality])
+    streams = {}
+    if os.path.isfile('streams_cache.json'):
+        with open('streams_cache.json') as streams_file:
+            streams = json.load(streams_file)
+    if channel in streams:
+        channel = streams[channel]
+    call(['livestreamer', 'http://twitch.tv/' + channel, quality])
 
 @cli.command(short_help='Check user followed channels.')
 @click.argument('username')
+@click.option('--setup')
 def following(username):
     '''Lists a users followed streams'''
     print_following(username)
