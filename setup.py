@@ -16,7 +16,7 @@ setup(
         'click',
         'json',
         'livestreamer',
-        'os.path',
+        'os',
         'requests',
     ],
     entry_points={
