@@ -1,6 +1,6 @@
 import click
 import json
-import os.path
+import os
 import requests
 
 from subprocess import call
@@ -70,8 +70,9 @@ def trim(string, length):
         return string[0:length - 3] + '...'
 
 def cache_streams(streams):
-    with open('streams_cache.json', 'w') as outfile:
-        json.dump(streams, outfile, indent = 2)
+    streams_cache = os.path.join(os.path.dirname(__file__), 'streams_cache.json');
+    with open(streams_cache, 'w') as outfile:
+        json.dump(streams, outfile, indent = 4)
 
 @cli.command(short_help='Checks the status of a single channel.')
 @click.argument('channel')
@@ -110,16 +111,16 @@ def launch_stream(channel, quality):
     if not can_connect_to_twitch():
         return
     streams = {}
-    if os.path.isfile('streams_cache.json'):
-        with open('streams_cache.json') as streams_file:
-            streams = json.load(streams_file)
+    streams_cache = os.path.join(os.path.dirname(__file__), 'streams_cache.json');
+    if os.path.isfile(streams_cache):
+        with open(streams_cache) as infile:
+            streams = json.load(infile)
     if channel in streams:
         channel = streams[channel]
     call(['livestreamer', 'http://twitch.tv/' + channel, quality])
 
 @cli.command(short_help='Check user followed channels.')
 @click.argument('username')
-@click.option('--setup')
 def following(username):
     '''Lists a users followed streams'''
     print_following(username)
