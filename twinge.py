@@ -47,6 +47,7 @@ def print_list(number):
     for x in range(0, len(streams)):
         number = ' ' + str(x + 1) + '.'
         name = trim(streams[x]['channel']['display_name'], name_size - 1)
+        name = name.replace(" ", "")
         streams_cache[x + 1] = name
         viewers = streams[x]['viewers']
         game = trim(streams[x]['game'], game_size - 1)
