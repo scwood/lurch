@@ -24,7 +24,7 @@ Or
 $ twinge watch n
 ```
 
-Where `n` corrosponds to a stream number in `twinge list`. `twinge watch 1` would launch livestreamer for the first stream in the list, `twinge watch 2` would launch it for the second, etc.
+Where `n` corresponds to a stream number in `twinge list`. `twinge watch 1` would launch livestreamer for the first stream in the list, `twinge watch 2` would launch it for the second, etc.
 
 Twinge can also check the status of a current channel.
 
