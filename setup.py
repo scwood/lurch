@@ -14,9 +14,7 @@ setup(
     py_modules=['twinge'],
     install_requires=[
         'click',
-        'json',
         'livestreamer',
-        'os',
         'requests',
     ],
     entry_points={
