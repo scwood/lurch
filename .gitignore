@@ -4,3 +4,4 @@ dist/
 streams_cache.json
 twinge.egg-info/
 user.json
+venv
