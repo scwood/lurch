@@ -6,12 +6,13 @@ def read(fname):
 
 setup(
     name='twinge',
-    version='1.0',
+    version='0.2',
     author='Spencer Wood',
     author_email='spencercwood@gmail.com',
     description='CLI for Twitch.tv',
     long_description=read('README.md'),
-    py_modules=['twinge'],
+    url='https://github.com/scwood/twinge'
+    packages=['twinge'],
     install_requires=[
         'click',
         'livestreamer',
@@ -22,4 +23,5 @@ setup(
             'twinge=twinge:cli',
         ],
     },
+    zip_safe=False
 )

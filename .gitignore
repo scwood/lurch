@@ -1,7 +1,6 @@
-__pycache__/
-build/
-dist/
-streams_cache.json
+__pycache__
+*.pyc
+build
+dist
 twinge.egg-info/
-user.json
 venv
