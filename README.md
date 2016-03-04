@@ -8,7 +8,7 @@ Twinge is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, inclu
 
 `$ twinge list` will list the top streams currently live on twitch.tv
 
-By default Twinge will list the 25 most popular streams. This number can be increased or decreased with an option number argument `-n` or `--number`
+By default Twinge will list the 25 most popular streams. This number can be increased or decreased with an optional number argument `-n`.
 
 `$ twinge list -n 50`
 
