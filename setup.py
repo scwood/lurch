@@ -11,7 +11,7 @@ setup(
     author_email='spencercwood@gmail.com',
     description='CLI for Twitch.tv',
     long_description=read('README.md'),
-    url='https://github.com/scwood/twinge'
+    url='https://github.com/scwood/twinge',
     packages=['twinge'],
     install_requires=[
         'click',
