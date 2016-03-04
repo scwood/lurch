@@ -91,16 +91,14 @@ def watch(client, channel, quality):
     client.watch_channel(channel, quality)
 
 
-@cli.command(short_help='Check user followed channels.')
-@click.argument('username')
-def following(username):
-    '''Lists a users followed streams'''
-    print_following(username)
+# @cli.command(short_help='Check user followed channels.')
+# @click.argument('username')
+# def following(username):
+#     '''Lists a users followed streams'''
+#     print_following(username)
 
 
 def print_following(username):
-    print('Not implmented')
-    return
     url = 'https://api.twitch.tv/kraken/users/' + username + '/follows/channels'
     api_call = requests.get(url)
     if api_call.status_code == 404:
