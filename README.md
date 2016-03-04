@@ -18,14 +18,6 @@ Twinge also provides a shortcut to easily launch a stream with livestreamer.
 $ twinge watch nl_kripp
 ```
 
-Or
-
-```
-$ twinge watch n
-```
-
-Where `n` corresponds to a stream number in `twinge list`. `twinge watch 1` would launch livestreamer for the first stream in the list, `twinge watch 2` would launch it for the second, etc.
-
 Twinge can also check the status of a current channel.
 
 ```
