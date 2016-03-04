@@ -6,7 +6,7 @@ def read(fname):
 
 setup(
     name='twinge',
-    version='0.2.2',
+    version='0.2.3',
     author='Spencer Wood',
     author_email='spencercwood@gmail.com',
     description='CLI for Twitch.tv',
