@@ -1,6 +1,1 @@
-__pycache__
-*.pyc
-build
-dist
-twinge.egg-info/
-venv
+Gemfile.lock
