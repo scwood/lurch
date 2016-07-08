@@ -2,7 +2,6 @@
 
 require 'docopt'
 require 'seize'
-require 'mkmf'
 
 doc = 'Seize: a CLI for Twitch.tv
 
@@ -10,7 +9,7 @@ Usage:
   seize list [--number=<value>]
   seize watch <channel> [--quality=<value>]
   seize check <channel>
-  seize (-h | --help)
+  seize (-h | --help | --version)
 
 Options:
   -h --help          Show this screen.
@@ -22,8 +21,6 @@ begin
   args = Docopt.docopt(doc, {:version => Seize::VERSION})
   if args['watch']
     Seize.watch(args['<channel>'], args['--quality'])
-  elsif args['list']
-    Seize.list(args['--number'])
   end
 rescue Docopt::Exit => e
   puts e.message
