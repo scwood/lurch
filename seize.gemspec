@@ -15,5 +15,6 @@ Gem::Specification.new do |s|
   s.executables  = ['seize']
   s.require_paths = ['lib']
 
-  s.add_dependency "docopt"
+  s.add_dependency("docopt")
+  s.add_dependency("rest-client")
 end
