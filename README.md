@@ -2,7 +2,7 @@
 
 <img src='https://cloud.githubusercontent.com/assets/9126138/16828648/ef17e534-494e-11e6-9716-ff95d2e40d67.png'>
 
-Seize is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single stream. Seize also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that launching a stream from the terminal is quick and easy.
+Seize is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, including listing the top channels that are currently live and checking the status of a single channel. Seize also provides a simple interface into [livestreamer](https://github.com/chrippa/livestreamer) so that watching a stream from the terminal is quick and easy.
 
 ## Example Usage
 
