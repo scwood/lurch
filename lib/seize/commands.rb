@@ -28,27 +28,27 @@ module Seize
       :game => 'game'
     } 
     result << line
-    streams = Twitch.get_streams(limit: number)['streams']
+    streams = Seize::Twitch.get_streams(limit: number)['streams']
     streams.each_with_index do |stream, i|
       result << row_template % {
         :number => "#{i+1}.",
-        :name => Seize.truncate(stream['channel']['name'], name_length),
-        :viewers => Seize.commaize(stream['viewers']),
-        :game => Seize.truncate(stream['game'], game_length)
+        :name => Seize::Utils.truncate(stream['channel']['name'], name_length),
+        :viewers => Seize::Utils.commaize(stream['viewers']),
+        :game => Seize::Utils.truncate(stream['game'], game_length)
       }
     end
     puts result
   end
 
   def self.check(channel_name)
-    channel = Twitch.get_channel(channel_name)
+    channel = Seize::Twitch.get_channel(channel_name)
     if channel.nil?
       puts 'error: channel does not exist'
     elsif channel['stream'].nil?
       puts "#{channel_name} is offline"
     else
       game = channel['stream']['game']
-      viewers = Seize.commaize(channel['stream']['viewers'])
+      viewers = Seize::Utils.commaize(channel['stream']['viewers'])
       puts "#{channel_name} is playing #{game} with #{viewers} viewers"
     end
   end
