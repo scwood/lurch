@@ -3,13 +3,11 @@ require File.expand_path("../lib/seize/version", __FILE__)
 Gem::Specification.new do |s|
   s.name = 'seize'
   s.version = Seize::VERSION
-  s.licenses = ['MIT']
-  s.authors = ['Spencer Wood']
-  s.email = ['spencercwood@gmail.com']
-
   s.summary = 'A CLI for Twitch.tv'
-  s.description = 'A CLI for Twitch.tv. Full documentation: ' \
-                  'https://github.com/scwood/seize'
+  s.description = 'A CLI for Twitch.tv. Full documentation: https://github.com/scwood/seize'
+  s.author = 'Spencer Wood'
+  s.email = 'spencercwood@gmail.com'
+  s.license = 'MIT'
   s.homepage = 'https://github.com/scwood/seize'
 
   s.files = Dir.glob('{bin,lib}/**/*') + ['README.md']
