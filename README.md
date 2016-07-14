@@ -6,9 +6,9 @@ Seize is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, includ
 
 ## Example Usage
 
-`$ seize list` will list the top streams currently live on twitch.tv
+`$ seize list` will list the top channels currently live on twitch.tv
 
-By default Seize will list the 25 most popular streams. This number can be increased or decreased with an optional number argument `--number`.
+By default Seize will list the 25 most popular channels. This number can be increased or decreased with an optional number argument `--number`.
 
 `$ seize list --number 50`
 
