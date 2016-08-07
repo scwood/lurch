@@ -22,19 +22,19 @@ module Seize
     line = '-' * line_length << "\n"
     result << line
     result << row_template % {
-      :number => '#',
-      :name => 'channel',
-      :viewers => 'viewers',
-      :game => 'game'
+      number: '#',
+      name: 'channel',
+      viewers: 'viewers',
+      game: 'game'
     } 
     result << line
     streams = Seize::Twitch.get_streams(limit: number)['streams']
     streams.each_with_index do |stream, i|
       result << row_template % {
-        :number => "#{i+1}.",
-        :name => Seize::Utils.truncate(stream['channel']['name'], name_length),
-        :viewers => Seize::Utils.commaize(stream['viewers']),
-        :game => Seize::Utils.truncate(stream['game'], game_length)
+        number: "#{i+1}.",
+        name: Seize::Utils.truncate(stream['channel']['name'], name_length),
+        viewers: Seize::Utils.commaize(stream['viewers']),
+        game: Seize::Utils.truncate(stream['game'], game_length)
       }
     end
     puts result

@@ -9,7 +9,7 @@ module Seize
     # TODO support games paramater
     def self.get_streams(limit: nil)
       streams_response = RestClient.get("#{BASE_URL}/streams", {
-        :params => { :limit => limit }, :headers => HEADERS,
+        params: { limit: limit }, headers: HEADERS,
       })
       JSON.parse(streams_response)
     end
@@ -18,7 +18,7 @@ module Seize
       begin
         channel_response = RestClient.get(
           "#{BASE_URL}/streams/#{channel_name}",
-          { :headers => HEADERS })
+          { headers: HEADERS })
         JSON.parse(channel_response)
       rescue RestClient::NotFound
         nil

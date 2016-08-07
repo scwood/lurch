@@ -16,7 +16,7 @@ Options:
   --quality=<value>  Livestreamer quality. [default: best]'
 
 begin
-  args = Docopt.docopt(doc, {:version => Seize::VERSION})
+  args = Docopt.docopt(doc, { version: Seize::VERSION })
   if args['watch']
     Seize.watch(args['<channel>'], args['--quality'])
   elsif args['list']
