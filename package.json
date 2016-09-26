@@ -5,6 +5,7 @@
   "scripts": {
     "build": "babel -d build/src src && babel -d build/bin bin",
     "start": "babel-node bin/lurch.js",
+    "deploy": "npm publish && git push --follow-tags",
     "prepublish": "npm run build"
   },
   "author": "Spencer Wood <spencercwood@gmail.com>",
