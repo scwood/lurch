@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fortyTwo from '../src/something';
 
 const doc = `Usage:
