@@ -1,11 +1,10 @@
 {
   "name": "lurch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
-  "main": "build/index.js",
   "scripts": {
     "build": "babel -d build/src src && babel -d build/bin bin",
-    "start": "babel-node ./bin/lurch.js",
+    "start": "babel-node bin/lurch.js",
     "prepublish": "npm run build"
   },
   "author": "Spencer Wood <spencercwood@gmail.com>",
