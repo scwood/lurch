@@ -23,5 +23,8 @@
   },
   "files": [
     "build"
-  ]
+  ],
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1"
+  }
 }
