@@ -1,6 +1,6 @@
 {
   "name": "lurch",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A CLI for Twitch.tv.",
   "scripts": {
     "build": "babel -d build/src src && babel -d build/bin bin",
@@ -20,5 +20,7 @@
     "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.14.0"
   },
-  "files": ["build"]
+  "files": [
+    "build"
+  ]
 }
