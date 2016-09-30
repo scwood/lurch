@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
-import fortyTwo from '../src/something';
+import { docopt } from 'docopt';
+
+import pkg from '../package.json';
 
 const doc = `Usage:
   lurch list [--number=<value>]
@@ -14,4 +16,4 @@ Options:
   --number=<value>   Number of streams to list from 1-100. [default: 25]
   --quality=<value>  Livestreamer quality. [default: best]`
 
-console.log(doc);
+console.log(docopt(doc, { version: pkg.version }));

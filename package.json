@@ -3,8 +3,8 @@
   "version": "1.0.7",
   "description": "A CLI for Twitch.tv.",
   "scripts": {
-    "build": "babel -d build/src src && babel -d build/bin bin",
-    "start": "babel-node bin/lurch.js",
+    "build": "babel -d build/src src",
+    "start": "babel-node src/cli.js",
     "deploy": "npm publish && git push --follow-tags",
     "prepublish": "npm run build"
   },
@@ -15,7 +15,7 @@
     "url": "https://github.com/scwood/lurch"
   },
   "bin": {
-    "lurch": "build/bin/lurch.js"
+    "lurch": "build/cli.js"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -25,6 +25,7 @@
     "build"
   ],
   "dependencies": {
+    "docopt": "^0.6.2",
     "isomorphic-fetch": "^2.2.1"
   }
 }
