@@ -3,7 +3,7 @@
   "version": "1.0.8",
   "description": "A CLI for Twitch.tv.",
   "scripts": {
-    "build": "babel -d build/src src",
+    "build": "babel src --out-dir build",
     "start": "babel-node src/cli.js",
     "deploy": "npm publish && git push --follow-tags",
     "prepublish": "npm run build"
