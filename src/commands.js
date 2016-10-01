@@ -39,7 +39,7 @@ function list(number) {
           stream['viewers'],
           stream['game']);
       });
-      return result;
+      return result.slice(0, -2);
     });
 }
 
@@ -51,7 +51,7 @@ function check(channel) {
   return fetch(`${twitchUrl}/streams/${channel}`, { headers })
     .then(response => {
       if (response.status == 404) {
-        return 'error: channel does not exist'
+        return 'channel does not exist'
       }
       return response.json()
         .then(json => {
