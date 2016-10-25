@@ -2,6 +2,9 @@
   "name": "lurch",
   "version": "1.0.12",
   "description": "A CLI for Twitch.tv.",
+  "babel": {
+    "presets": ["es2015"]
+  },
   "scripts": {
     "build": "babel src --out-dir build",
     "start": "babel-node src/cli.js",
