@@ -1,6 +1,5 @@
-import childProcess from 'child_process';
-
 import _ from 'lodash'
+import childProcess from 'child_process';
 import fetch from 'isomorphic-fetch';
 
 const twitchUrl = 'https://api.twitch.tv/kraken';
