@@ -15,7 +15,7 @@ Options:
   -h --help          Show this screen.
   --version          Show version.
   --number=<value>   Number of streams to list from 1-100. [default: 25]
-  --quality=<value>  Livestreamer quality. [default: best]`
+  --quality=<value>  Livestreamer quality. [default: best]`;
 
 const options = docopt(usage, { version: pkg.version });
 
