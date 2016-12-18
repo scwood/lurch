@@ -4,7 +4,7 @@ import fetch from 'isomorphic-fetch';
 
 const twitchUrl = 'https://api.twitch.tv/kraken';
 const headers = {
-  accept: 'application/vnd.twitchtv[.version]+json',
+  accept: 'application/vnd.twitchtv.v5+json',
   'client-id': '2n7irufqjtyyayigyc4ubzq174axeex'
 };
 
@@ -28,23 +28,25 @@ function rowTemplate(number, name, viewers, game) {
   return ` ${paddedNumber}${paddedName}${paddedViewers}${truncatedGame}\n`;
 }
 
-function list() {
-  let result = '';
+async function list(number = null) {
   const seperator = '-'.repeat(80) + '\n';
+  let result = '';
   result += seperator;
   result += rowTemplate('#', 'name', 'viewers', 'game');
   result += seperator;
-  return fetch(`${twitchUrl}/streams`, { headers })
-    .then(response => response.json())
-    .then(json => {
-      json['streams'].forEach((stream, i) => {
-        result += rowTemplate(i + 1,
-          stream['channel']['name'],
-          stream['viewers'],
-          stream['game']);
-      });
-      return result.slice(0, -2);
-    });
+  let url = `${twitchUrl}/streams`;
+  if (number) {
+    url += `?limit=${number}`;
+  }
+  const response = await fetch(url, { headers });
+  const json = await response.json();
+  json['streams'].forEach((stream, i) => {
+    result += rowTemplate(i + 1,
+      stream['channel']['name'],
+      stream['viewers'],
+      stream['game']);
+  });
+  return result.slice(0, -1); // remove extra endline
 }
 
 function watch(channel, quality) {
@@ -52,23 +54,18 @@ function watch(channel, quality) {
     'livestreamer', [`https://twitch.tv/${channel}`, quality]);
 }
 
-function check(channel) {
-  return fetch(`${twitchUrl}/streams/${channel}`, { headers })
-    .then(response => {
-      if (response.status == 404) {
-        return 'channel does not exist';
-      }
-      return response.json()
-        .then(json => {
-          if (json['stream'] == null) {
-            return `${channel} is offline`;
-          }
-          const game = json['stream']['game'];
-          const viewers = new Intl.NumberFormat().format(
-            json['stream']['viewers']);
-          return `${channel} is playing ${game} with ${viewers} viewers`;
-        });
-    });
+async function check(channel) {
+  const response = await fetch(`${twitchUrl}/streams/${channel}`, { headers });
+  if (response.status == 404) {
+    return 'channel does not exist';
+  }
+  const json = await response.json();
+  if (json['stream'] == null) {
+    return `${channel} is offline`;
+  }
+  const game = json['stream']['game'];
+  const viewers = new Intl.NumberFormat().format(json['stream']['viewers']);
+  return `${channel} is playing ${game} with ${viewers} viewers`;
 }
 
 export default { list, watch, check };
