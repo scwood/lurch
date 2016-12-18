@@ -22,9 +22,10 @@ const options = docopt(usage, { version: pkg.version });
 if (options['list']) {
   commands.list(options['--number']).then(result => console.log(result));
 } else if (options['watch']) {
-  const process = commands.watch(options['<channel>'], options['--quality']);
-  process.stdout.on('data', data => console.log(data.toString()));
-  process.stderr.on('data', data => console.log(data.toString()));
+  const watchProcess = commands.watch(
+    options['<channel>'], options['--quality']);
+  watchProcess.stdout.on('data', data => console.log(data.toString()));
+  watchProcess.stderr.on('data', data => console.log(data.toString()));
 } else if (options['check']) {
   commands.check(options['<channel>']).then(result => console.log(result));
 }
