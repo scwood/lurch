@@ -55,10 +55,15 @@ async function check(channelName) {
   const response = await fetch(url, { headers });
   const json = await response.json();
   const { streams } = json;
-  if (streams.some(stream => stream.channel.display_name === channelName)) {
-    return `${channelName} is online`;
+  const found = streams.find(stream => {
+    return stream.channel.display_name === channelName;
+  });
+  if (found === null) {
+    return `${channelName} is offline or doesn't exist`;
   }
-  return `${channelName} is offline`;
+  const game = found['game'];
+  const viewers = new Intl.NumberFormat().format(found['viewers']);
+  return `${channelName} is playing ${game} with ${viewers} viewers`;
 }
 
 function watch(channel, quality) {
