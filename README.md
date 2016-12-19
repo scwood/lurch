@@ -34,7 +34,7 @@ Lurch can also check the status of a current channel.
 
 ```
 $ lurch check nl_kripp
-nl_kripp is playing Hearthstone: Heroes of Warcraft with 13,539 viewers.
+nl_kripp is online
 ```
 
 ## Installation

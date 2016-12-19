@@ -49,23 +49,24 @@ async function list(number = null) {
   return result.slice(0, -1); // remove extra endline
 }
 
+async function check(channelName) {
+  const encodedName = encodeURIComponent(channelName);
+  const url = `${twitchUrl}/search/streams?query=${encodedName}&limit=100`;
+  const response = await fetch(url, { headers });
+  const json = await response.json();
+  const { streams } = json;
+  if (streams.some(stream => stream.channel.display_name === channelName)) {
+    return `${channelName} is online`;
+  }
+  return `${channelName} is offline`;
+}
+
 function watch(channel, quality) {
   return childProcess.spawn(
     'livestreamer', [`https://twitch.tv/${channel}`, quality]);
 }
 
-async function check(channel) {
-  const response = await fetch(`${twitchUrl}/streams/${channel}`, { headers });
-  if (response.status == 404) {
-    return 'channel does not exist';
-  }
-  const json = await response.json();
-  if (json['stream'] == null) {
-    return `${channel} is offline`;
-  }
-  const game = json['stream']['game'];
-  const viewers = new Intl.NumberFormat().format(json['stream']['viewers']);
-  return `${channel} is playing ${game} with ${viewers} viewers`;
-}
-
 export default { list, watch, check };
+
+// stream: 23969989216
+// channel: 26301881
