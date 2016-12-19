@@ -67,6 +67,3 @@ function watch(channel, quality) {
 }
 
 export default { list, watch, check };
-
-// stream: 23969989216
-// channel: 26301881
