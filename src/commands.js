@@ -58,7 +58,7 @@ async function check(channelName) {
   const found = streams.find(stream => {
     return stream.channel.display_name === channelName;
   });
-  if (found === null) {
+  if (found === undefined) {
     return `${channelName} is offline or doesn't exist`;
   }
   const game = found['game'];
