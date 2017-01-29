@@ -40,7 +40,8 @@ function rowTemplate(number, name, viewers, game) {
 async function check(channelName) {
   const streams = await twitch.searchStreams(channelName);
   const found = streams.find(stream => {
-    return stream.channel.display_name === channelName;
+    const { channel: { display_name } } = stream;
+    return display_name.toLowerCase() === channelName.toLowerCase();
   });
   if (found === undefined) {
     return `${channelName} is offline or doesn't exist`;
