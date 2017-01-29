@@ -6,7 +6,7 @@ Lurch is a CLI for [twitch.tv](http://twitch.tv). It can do a few things, includ
 
 ```
 Usage:
-  lurch list [--number=<value>]
+  lurch list [--number=<value>] [--game=<gamename>]
   lurch watch <channel> [--quality=<value>]
   lurch check <channel>
   lurch (-h | --help | --version)
@@ -15,6 +15,7 @@ Options:
   -h --help          Show this screen.
   --version          Show version.
   --number=<value>   Number of streams to list from 1-100. [default: 25]
+  --game=<gamename>  Name of game to list (lists all by default).
   --quality=<value>  Livestreamer quality. [default: best]
 ```
 
@@ -23,6 +24,10 @@ Options:
 By default Lurch will list the 25 most popular channels. This number can be increased or decreased with an optional number argument.
 
 `$ lurch list --number 50`
+
+The list can also be filtered by game with an optional argument. Use quotes for games with multi-worded names.
+
+`$ lurch list --game "counter-strike: global offensive"`
 
 Lurch also provides a shortcut to easily launch a stream with livestreamer.
 
