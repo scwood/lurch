@@ -28,7 +28,7 @@ function rowTemplate(number, name, viewers, game) {
   return ` ${paddedNumber}${paddedName}${paddedViewers}${truncatedGame}\n`;
 }
 
-async function list(number = null) {
+async function list(number = null, game = null) {
   const seperator = '-'.repeat(80) + '\n';
   let result = '';
   result += seperator;
@@ -37,6 +37,11 @@ async function list(number = null) {
   let url = `${twitchUrl}/streams`;
   if (number) {
     url += `?limit=${number}`;
+    if (game) {
+      url += `&game=${game}`;
+    }
+  } else if (game) {
+    url += `?game=${game}`;
   }
   const response = await fetch(url, { headers });
   const json = await response.json();
