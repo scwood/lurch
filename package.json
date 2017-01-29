@@ -6,7 +6,7 @@
     "start": "babel-node src/cli.js",
     "test": "jest",
     "build": "babel src --out-dir build",
-    "deploy": "npm run test && npm run build && npm publish && git push --follow-tags"
+    "deploy": "npm test && npm run build && npm publish && git push --follow-tags"
   },
   "author": "Spencer Wood <spencercwood@gmail.com>",
   "license": "MIT",
