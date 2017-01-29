@@ -46,9 +46,9 @@ async function check(channelName) {
   if (found === undefined) {
     return `${channelName} is offline or doesn't exist`;
   }
-  const game = found['game'];
-  const viewers = new Intl.NumberFormat().format(found['viewers']);
-  return `${channelName} is playing ${game} with ${viewers} viewers`;
+  const { channel: { display_name }, game, viewers } = found;
+  const numberOfViewers = new Intl.NumberFormat().format(viewers);
+  return `${display_name} is playing ${game} with ${numberOfViewers} viewers`;
 }
 
 function watch(channel, quality) {
