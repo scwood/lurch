@@ -1,6 +1,6 @@
 {
   "name": "lurch",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "A CLI for Twitch.tv.",
   "scripts": {
     "start": "babel-node src/cli.js",
