@@ -11,11 +11,11 @@ class Twitch {
     };
   }
 
-  async getStreams(number = null, game = null) {
+  async getStreams(limit = null, game = null) {
     let url = `${this.baseUrl}/streams?`;
     const queryParams = {};
-    if (number) {
-      queryParams.number = number;
+    if (limit) {
+      queryParams.limit = limit;
     }
     if (game) {
       queryParams.game = game;

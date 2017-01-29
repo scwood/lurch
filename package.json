@@ -3,10 +3,10 @@
   "version": "1.1.5",
   "description": "A CLI for Twitch.tv.",
   "scripts": {
-    "build": "babel src --out-dir build",
     "start": "babel-node src/cli.js",
-    "deploy": "npm publish && git push --follow-tags",
-    "prepublish": "npm run build"
+    "test": "jest",
+    "build": "babel src --out-dir build",
+    "deploy": "npm run test && npm run build && npm publish && git push --follow-tags"
   },
   "author": "Spencer Wood <spencercwood@gmail.com>",
   "license": "MIT",
@@ -29,6 +29,7 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-plugin-transform-runtime": "^6.22.0",
-    "babel-preset-latest": "^6.22.0"
+    "babel-preset-latest": "^6.22.0",
+    "jest": "^18.1.0"
   }
 }
