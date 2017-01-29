@@ -1,12 +1,21 @@
 import _ from 'lodash';
 import childProcess from 'child_process';
-import fetch from 'isomorphic-fetch';
 
-const twitchUrl = 'https://api.twitch.tv/kraken';
-const headers = {
-  accept: 'application/vnd.twitchtv.v5+json',
-  'client-id': '2n7irufqjtyyayigyc4ubzq174axeex'
-};
+import twitch from './twitch';
+
+async function list(number = null, game = null) {
+  const seperator = '-'.repeat(80);
+  let result = [];
+  result.push(seperator);
+  result.push(rowTemplate('#', 'name', 'viewers', 'game'));
+  result.push(seperator);
+  const streams = await twitch.getStreams(number, game);
+  const rows = streams.map((stream, i) => {
+    const { channel: { name }, viewers, game } = stream;
+    return rowTemplate(i + 1, name, viewers, game);
+  });
+  return result.concat(rows).join('\n');
+}
 
 function rowTemplate(number, name, viewers, game) {
   const numberColumns = 6;
@@ -25,41 +34,11 @@ function rowTemplate(number, name, viewers, game) {
         })
       : viewers, viewersColumns);
   const truncatedGame = _.truncate(game, { length: gameColumns });
-  return ` ${paddedNumber}${paddedName}${paddedViewers}${truncatedGame}\n`;
-}
-
-async function list(number = null, game = null) {
-  const seperator = '-'.repeat(80) + '\n';
-  let result = '';
-  result += seperator;
-  result += rowTemplate('#', 'name', 'viewers', 'game');
-  result += seperator;
-  let url = `${twitchUrl}/streams`;
-  if (number) {
-    url += `?limit=${number}`;
-    if (game) {
-      url += `&game=${game}`;
-    }
-  } else if (game) {
-    url += `?game=${game}`;
-  }
-  const response = await fetch(url, { headers });
-  const json = await response.json();
-  json['streams'].forEach((stream, i) => {
-    result += rowTemplate(i + 1,
-      stream['channel']['name'],
-      stream['viewers'],
-      stream['game']);
-  });
-  return result.slice(0, -1); // remove extra endline
+  return ` ${paddedNumber}${paddedName}${paddedViewers}${truncatedGame}`;
 }
 
 async function check(channelName) {
-  const encodedName = encodeURIComponent(channelName);
-  const url = `${twitchUrl}/search/streams?query=${encodedName}&limit=100`;
-  const response = await fetch(url, { headers });
-  const json = await response.json();
-  const { streams } = json;
+  const streams = await twitch.searchStreams(channelName);
   const found = streams.find(stream => {
     return stream.channel.display_name === channelName;
   });
