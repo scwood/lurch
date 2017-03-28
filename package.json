@@ -15,7 +15,8 @@
     "url": "https://github.com/scwood/lurch"
   },
   "files": [
-    "build"
+    "build",
+    "src"
   ],
   "bin": {
     "lurch": "build/cli.js"
