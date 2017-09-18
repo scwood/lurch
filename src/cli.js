@@ -7,7 +7,7 @@ import pkg from '../package.json';
 
 async function main() {
   const usage = `Usage:
-    lurch list [--number=<number>] [--game=<game>]
+    lurch (ls | list) [--number=<number>] [--game=<game>]
     lurch watch <channel> [--quality=<quality>]
     lurch check <channel>
     lurch (-h | --help | --version)
@@ -19,7 +19,7 @@ async function main() {
     --game=<name>        Name of game to list (lists all by default).
     --quality=<quality>  Livestreamer quality. [default: best]`;
   const options = docopt(usage, { version: pkg.version });
-  if (options['list']) {
+  if (options['list'] || options['ls']) {
     console.log(await commands.list(options['--number'], options['--game']));
   } else if (options['watch']) {
     const watchProcess = commands.watch(
@@ -35,6 +35,6 @@ if (!module.parent) {
   try {
     main();
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
