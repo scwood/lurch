@@ -32,9 +32,6 @@ async function main() {
 }
 
 if (!module.parent) {
-  try {
-    main();
-  } catch (error) {
-    console.error(error);
-  }
+  main()
+    .catch(console.error);
 }
